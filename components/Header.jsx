@@ -1,7 +1,8 @@
 import Link from "next/link";
 import React from "react";
 // import Logo from "../public/Phanero logo.png";
-import Logo from "../public/logo White.svg";
+// import Logo from "../public/logo White.svg";
+import Logo from "../public/logo.svg";
 import { FiChevronDown } from "react-icons/fi";
 import Image from "next/image";
 
