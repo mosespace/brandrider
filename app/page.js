@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Hero from "@/components/Hero";
 
 export const metadata = {
   title: "Home - BrandRider",
@@ -10,6 +11,7 @@ export default function Home() {
   return (
     <>
       <Header />
+      <Hero/>
     </>
   );
 }
