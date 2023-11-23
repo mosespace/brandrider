@@ -1,4 +1,3 @@
-import React from "react";
 import Bg from "../public/brandRider-BG2.jpg";
 import Image from "next/image";
 
