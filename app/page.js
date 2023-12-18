@@ -1,9 +1,9 @@
-import Launch from "@/components/Launch";
+import Hero from "@/components/Hero";
 
 export default function Home() {
   return (
-    <main className='flex min-h-screen items-center justify-center'>
-      <Launch />
+    <main className=' h-screen'>
+      <Hero />
     </main>
   );
 }
