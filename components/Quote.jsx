@@ -1,6 +1,44 @@
-import React from "react";
+"use client";
+import toast from "sonner";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function Quote() {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const [loading, setLoading] = useState(false);
+
+  const onSubmit = async (data) => {
+    // console.log(data);
+    setLoading(true);
+    try {
+      const response = await fetch(process.env.NEXT_PUBLIC_QUOTE_EMAIL_API, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      // console.log(response);
+      if (response.ok) {
+        toast.success("Your quote has been sent successfully");
+        reset();
+        setLoading(false);
+        // console.log(response);
+      } else {
+        toast.error("Your quote has not been sent. Give it a try");
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
   return (
     <>
       <section className='py-10  bg-gray-100 sm:py-16 lg:py-24'>
@@ -104,39 +142,57 @@ export default function Quote() {
             <div className='lg:pl-12'>
               <div className='overflow-hidden bg-white rounded-md'>
                 <div className='p-6 sm:p-10'>
-                  <h3 className='text-3xl font-semibold text-white'>
-                    Get a free quote
-                  </h3>
+                  {loading ? (
+                    <button className='text-3xl font-semibold text-white'>
+                      Sending quotation...
+                    </button>
+                  ) : (
+                    <button className='text-3xl font-semibold text-white'>
+                      Get a free quote
+                    </button>
+                  )}
+
                   <p className='mt-4 text-base text-black'>
                     We create innovative, eye-catching websites, logos, posters,
                     and flyers that are competitive and minimalistic while
                     keeping your campaign’s goal in mind.
                   </p>
 
-                  <form action='#' method='POST' className='mt-4'>
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    method='POST'
+                    className='mt-4'
+                  >
                     <div className='space-y-6'>
                       <div>
                         <label
-                          for=''
+                          htmlFor=''
                           className='text-base font-medium text-gray-900'
                         >
                           {" "}
-                          Your name{" "}
+                          Your Full Names{" "}
                         </label>
                         <div className='mt-2.5 relative'>
                           <input
                             type='text'
-                            name=''
-                            id=''
+                            name='full_Names'
+                            id='full_Names'
+                            {...register("full_Names", { required: true })}
                             placeholder='Enter your full name'
                             className='block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 caret-amber-500'
                           />
+                          {errors.full_Names && (
+                            <p class='text-sm text-red-600 dark:text-red-500'>
+                              <span class='font-medium'>Oops!</span> The full
+                              Names are required!
+                            </p>
+                          )}
                         </div>
                       </div>
 
                       <div>
                         <label
-                          for=''
+                          htmlFor=''
                           className='text-base font-medium text-gray-900'
                         >
                           {" "}
@@ -145,17 +201,24 @@ export default function Quote() {
                         <div className='mt-2.5 relative'>
                           <input
                             type='text'
-                            name=''
-                            id=''
-                            placeholder='Enter your full name'
+                            name='email_address'
+                            id='email_address'
+                            {...register("email_address", { required: true })}
+                            placeholder='Enter your email'
                             className='block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 caret-amber-500'
                           />
+                          {errors.email_address && (
+                            <p class='text-sm text-red-600 dark:text-red-500'>
+                              <span class='font-medium'>Oops!</span> The email
+                              is required!
+                            </p>
+                          )}
                         </div>
                       </div>
 
                       <div>
                         <label
-                          for=''
+                          htmlFor=''
                           className='text-base font-medium text-gray-900'
                         >
                           {" "}
@@ -163,22 +226,38 @@ export default function Quote() {
                         </label>
                         <div className='mt-2.5 relative'>
                           <textarea
-                            name=''
-                            id=''
+                            name='project_brief'
+                            id='project_brief'
+                            {...register("project_brief", { required: true })}
                             placeholder='Enter your project brief'
                             className='block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md resize-y focus:outline-none focus:ring-amber-500 focus:border-amber-500 caret-amber-500'
                             rows='4'
-                          ></textarea>
+                          />
+                          {errors.project_brief && (
+                            <p class='text-sm text-red-600 dark:text-red-500'>
+                              <span class='font-medium'>Oops!</span> The project
+                              brief is required!
+                            </p>
+                          )}
                         </div>
                       </div>
 
                       <div>
-                        <button
-                          type='submit'
-                          className='inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-amber-600 border border-transparent rounded-md focus:outline-none hover:bg-amber-700 focus:bg-amber-700'
-                        >
-                          Get Free Quote
-                        </button>
+                        {loading ? (
+                          <button
+                            type='submit'
+                            className='inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-amber-600 border border-transparent rounded-md focus:outline-none hover:bg-amber-700 focus:bg-amber-700'
+                          >
+                            Sending quotation...
+                          </button>
+                        ) : (
+                          <button
+                            type='submit'
+                            className='inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-amber-600 border border-transparent rounded-md focus:outline-none hover:bg-amber-700 focus:bg-amber-700'
+                          >
+                            Get Free Quote
+                          </button>
+                        )}
                       </div>
                     </div>
                   </form>
