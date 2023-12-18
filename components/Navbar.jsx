@@ -80,7 +80,7 @@ export default function Navbar() {
                       <Image
                         width={96}
                         height={96}
-                        src='/desishub-coding-school-logo.png'
+                        src='/logo.svg'
                         alt='desishub-coding-school-logo'
                         className='w-[4.5rem] text-teal-accent-400'
                       />

@@ -13,7 +13,7 @@ export default function Hero() {
               flyers that are competitive and minimalistic while keeping your
               campaign’s goal in mind.
             </p>
-            <div className='mt-6'>
+            <div className='mt-6 flex flex-col md:block'>
               Try us today: Click &nbsp;
               <span className='px-4 py-2 font-mono border rounded-full'>
                 brandriderug@gmail.com
