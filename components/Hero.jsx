@@ -78,14 +78,15 @@ export default function Hero() {
           <video
             className='relative object-cover w-full rounded shadow-2xl lg:rounded-2xl'
             controls
-            // autoPlay
-            // muted
+            autoPlay
+            muted
             loop
             src='/video_intro.mp4'
             typeof='video'
           />
         </div>
       </div>
+      
     </section>
   );
 }
