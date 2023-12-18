@@ -32,11 +32,11 @@ export default function Navbar() {
             <li>
               <Link
                 href='/'
-                aria-label='About us'
-                title='About us'
+                aria-label='Projects'
+                title='Projects'
                 className='font-medium tracking-wide  text-slate-950 transition-colors duration-200 hover:text-teal-accent-400'
               >
-                About us
+                Projects
               </Link>
             </li>
             <li>
@@ -106,11 +106,11 @@ export default function Navbar() {
                       <li>
                         <Link
                           href='/'
-                          aria-label='About us'
-                          title='About us'
+                          aria-label='Projects'
+                          title='Projects'
                           className='font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
                         >
-                          About us
+                          Projects
                         </Link>
                       </li>
                       <li>
