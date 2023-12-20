@@ -3,7 +3,7 @@ import Image from "next/image";
 import MyLogo from "../public/logo.svg";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
+import toast from "sonner";
 
 export default function Launch() {
   const {
